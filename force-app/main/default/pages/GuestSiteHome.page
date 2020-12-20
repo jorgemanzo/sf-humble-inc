@@ -1,0 +1,17 @@
+<apex:page showHeader="false" 
+    standardStylesheets="false" 
+    sidebar="false"
+    controller="GuestSiteHomeController"
+    >
+    <apex:slds /> 
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <h1>Guest Site Home</h1>
+    <apex:outputText value="{!contactName}"/><br/>
+    <apex:form >
+        <apex:commandButton value="Update Contact" action="{!updateContact}"/>
+    </apex:form>
+</apex:page>
