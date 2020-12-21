@@ -6,8 +6,15 @@ public without sharing class CasesSelector extends fflib_SObjectSelector{
     public List<Schema.SObjectField> getSObjectFieldList() {
         return new List<Schema.SObjectField> {
             Case.AccountId,
+            Case.ContactId,
             Case.EntitlementId,
-            Case.Id
+            Case.EntitlementId,
+            Case.Id,
+            Case.OwnerId,
+            Case.SlaStartDate,
+            Case.SlaExitDate,
+            Case.Status,
+            Case.SuppliedEmail
         };
     }
 
@@ -16,6 +23,17 @@ public without sharing class CasesSelector extends fflib_SObjectSelector{
             newQueryFactory()
                 .setCondition('Id IN :setIds')
             .toSOQL()
+        );
+    }
+
+    public List<Case> selectByIdWithContact(Set<Id> setIds) {
+        fflib_QueryFactory caseQueryFactory = newQueryFactory();
+
+        new ContactsSelector().
+            configureQueryFactoryFields(caseQueryFactory, 'Contact');
+
+        return (List<Case>) Database.query(
+            caseQueryFactory.setCondition('id IN :setIds').toSOQL()
         );
     }
 }

@@ -67,6 +67,11 @@ public without sharing class CaseDefaultEntitlement {
             }
         }
 
+        /**
+         * For entitlements that were created, apply the standard entitlements process to them.
+         */
+        EntitlementProcessService.applyStandardSupportEntitlementProcess(entitlementsToCreate);
+
         insert entitlementsToCreate;
     }
 }

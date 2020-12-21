@@ -1,3 +1,3 @@
-trigger CaseTrigger on Case (Before Insert, Before Update) {
+trigger CaseTrigger on Case (before insert, before update, after update) {
     new CaseTriggerHandler().run();
 }

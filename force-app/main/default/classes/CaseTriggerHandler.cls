@@ -1,4 +1,4 @@
-public without sharing class CaseTriggerHandler extends TriggerHandler {
+public with sharing class CaseTriggerHandler extends TriggerHandler {
     private List<Case> triggerNew;
     private List<Case> triggerOld;
     private Map<Id, Case> triggerMapNew;
@@ -21,5 +21,9 @@ public without sharing class CaseTriggerHandler extends TriggerHandler {
 
     public override void beforeUpdate() {
         CaseDefaultEntitlement.applyDefault(triggerNew);
+    }
+
+    public override void afterUpdate() {
+        MilestoneService.completeResolutionTimeMilestone(triggerNew);
     }
 }
